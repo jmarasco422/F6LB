@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>F6LB — Brag. Beat. Compete.</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,900;1,700&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --black:#0A0A0A;
+  --dark:#111111;
+  --darker:#0D0D0D;
+  --panel:#161616;
+  --panel2:#1C1C1C;
+  --border:#2A2A2A;
+  --border2:#333;
+  --red:#E8001C;
+  --red2:#C0001A;
+  --gold:#F5C518;
+  --gold2:#D4A810;
+  --white:#F0F0F0;
+  --gray:#888;
+  --lightgray:#B0B0B0;
+  --muted:#555;
+}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--white);font-family:'Barlow',sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--dark)}
+::-webkit-scrollbar-thumb{background:var(--red)}
+
+/* ── NAV ── */
+#nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1rem 2.5rem;
+  transition:all 0.3s;
+}
+#nav.scrolled{
+  background:rgba(10,10,10,0.97);
+  border-bottom:1px solid var(--border);
+  padding:.75rem 2.5rem;
+  backdrop-filter:blur(10px);
+}
+.nav-logo{
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:900;font-size:1.8rem;letter-spacing:0.05em;
+  color:var(--white);text-decoration:none;
+  display:flex;align-items:center;gap:4px;
+}
+.nav-logo .f{color:var(--white)}
+.nav-logo .six{color:var(--red);font-style:italic}
+.nav-logo .lb{color:var(--white)}
+.nav-links{display:flex;gap:2rem;list-style:none;align-items:center}
+@media(max-width:700px){.nav-links{display:none}}
+.nav-links a{
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:600;font-size:14px;letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--lightgray);text-decoration:none;transition:color 0.2s;
+}
+.nav-links a:hover{color:var(--gold)}
+.nav-support{
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:700;font-size:13px;letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--black);background:var(--red);
+  padding:8px 20px;text-decoration:none;
+  transition:background 0.2s;
+  border:none;cursor:pointer;
+}
+.nav-support:hover{background:var(--red2)}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+  background:var(--black);
+  padding:6rem 2rem 4rem;
+}
+.hero-grid-bg{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(232,0,28,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(232,0,28,0.04) 1px, transparent 1px);
+  background-size:60px 60px;
+}
+.hero-glow{
+  position:absolute;
+  width:600px;height:600px;
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(232,0,28,0.12) 0%, transparent 70%);
+  top:50%;left:40%;transform:translate(-50%,-50%);
+  pointer-events:none;
+}
+.hero-inner{
+  position:relative;z-index:2;
+  display:grid;grid-template-columns:1fr auto;
+  gap:4rem;align-items:center;
+  max-width:1100px;width:100%;
+}
+@media(max-width:800px){
+  .hero-inner{grid-template-columns:1fr;text-align:center}
+  .hero-pete{order:-1;display:flex;justify-content:center}
+}
+.hero-eyebrow{
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:600;font-size:13px;letter-spacing:0.4em;text-transform:uppercase;
+  color:var(--red);margin-bottom:1.25rem;
+  display:flex;align-items:center;gap:10px;
+}
+@media(max-width:800px){.hero-eyebrow{justify-content:center}}
+.hero-eyebrow::before,.hero-eyebrow::after{content:'';flex:0 0 30px;height:1px;background:var(--red);opacity:0.5}
+@media(max-width:800px){.hero-eyebrow::before{display:none}}
+.hero-title{
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:900;font-style:italic;
+  font-size:clamp(4rem,10vw,8.5rem);
+  line-height:0.88;
+  margin-bottom:1.5rem;
+  letter-spacing:-0.01em;
+}
+.hero-title .f6{color:var(--white)}
+.hero-title .lb{color:var(--red)}
+.hero-title .sub{
+  display:block;
+  font-size:clamp(1.5rem,4vw,3rem);
+  color:var(--lightgray);
+  font-weight:600;
+  font-style:normal;
+  letter-spacing:0.1em;
+  margin-top:0.5rem;
+}
+.hero-tagline{
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:700;font-size:clamp(1.1rem,2.5vw,1.6rem);
+  letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:1.5rem;
+}
+.hero-desc{
+  font-size:1rem;color:var(--lightgray);
+  line-height:1.75;max-width:540px;margin-bottom:2.5rem;
+}
+@media(max-width:800px){.hero-desc{margin:0 auto 2.5rem}}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
+@media(max-width:800px){.hero-btns{justify-content:center}}
+.btn-primary{
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:700;font-size:14px;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--black);background:var(--red);
+  padding:14px 32px;text-decoration:none;
+  transition:all 0.2s;border:none;cursor:pointer;display:inline-block;
+}
+.btn-primary:hover{background:var(--red2);transform:translateY(-1px)}
+.btn-outline{
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:700;font-size:14px;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--white);background:transparent;
+  padding:14px 32px;text-decoration:none;
+  border:1px solid var(--border2);
+  transition:all 0.2s;cursor:pointer;display:inline-block;
+}
+.btn-outline:hover{border-color:var(--white);background:rgba(255,255,255,0.05)}
+.hero-pete img{
+  width:320px;height:auto;
+  filter:drop-shadow(0 20px 60px rgba(232,0,28,0.3));
+  animation:peteBob 3s ease-in-out infinite;
+}
+@media(max-width:800px){.hero-pete img{width:220px}}
+@keyframes peteBob{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-12px)}
+}
+
+/* ── STATS BAR ── */
+.stats-bar{
+  background:var(--red);
+  padding:1.25rem 2.5rem;
+  display:flex;gap:3rem;justify-content:center;flex-wrap:wrap;
+}
+.stat-item{text-align:center}
+.stat-num{
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:900;font-size:2rem;
+  color:var(--black);line-height:1;
+}
+.stat-lbl{
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:600;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;
+  color:rgba(0,0,0,0.65);margin-top:2px;
+}
+
+/* ── SECTIONS ── */
+section{padding:6rem 2rem}
+.container{max-width:1100px;margin:0 auto}
+.section-header{margin-bottom:3.5rem}
+.section-tag{
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:600;font-size:12px;letter-spacing:0.4em;text-transform:uppercase;
+  color:var(--red);display:flex;align-items:center;gap:8px;margin-bottom:0.75rem;
+}
+.section-tag::before{content:'';width:24px;height:2px;background:var(--red)}
+.section-title{
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:900;font-style:italic;
+  font-size:clamp(2.5rem,5vw,4rem);
+  color:var(--white);line-height:1;
+}
+.section-title .accent{color:var(--red)}
+
+/* ── HOW IT WORKS ── */
+.how-section{background:var(--darker)}
+.how-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:2px;
+  margin-top:3rem;
+}
+@media(max-width:700px){.how-grid{grid-template-columns:1fr}}
+.how-item{
+  background:var(--panel);
+  padding:2.5rem 2rem;
+  position:relative;
+  border-top:3px solid transparent;
+  transition:border-color 0.3s;
+}
+.how-item:hover{border-top-color:var(--red)}
+.how-num{
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:900;font-size:4rem;
+  color:var(--border2);line-height:1;
+  position:absolute;top:1.5rem;right:1.5rem;
+}
+.how-icon{font-size:2rem;margin-bottom:1rem}
+.how-title{
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:700;font-size:1.3rem;letter-spacing:0.05em;
+  color:var(--gold);margin-bottom:0.75rem;text-transform:uppercase;
+}
+.how-desc{font-size:0.95rem;color:var(--lightgray);line-height:1.7}
+
+/* ── FOCUS 6 ── */
+.f6-section{background:var(--black)}
+.f6-grid{
+  display:grid;grid-template-columns:repeat(6,1fr);gap:2px;
+  margin-top:3rem;
+}
+@media(max-width:900px){.f6-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:500px){.f6-grid{grid-template-columns:repeat(2,1fr)}}
+.f6-item{
+  background:var(--panel);
+  padding:2rem 1.5rem;text-align:center;
+  border-bottom:2px solid transparent;
+  transition:all 0.25s;
+}
+.f6-item:hover{background:var(--panel2);border-bottom-color:var(--gold)}
+.f6-emoji{font-size:2rem;display:block;margin-bottom:0.75rem}
+.f6-name{
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:700;font-size:1rem;letter-spacing:0.08em;text-transform:uppercase;
+  color:var(--white);margin-bottom:0.25rem;
+}
+.f6-tag{
+  font-size:11px;color:var(--muted);letter-spacing:0.05em;
+  font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;
+}
+
+/* ── RESOURCE CENTER ── */
+.resources-section{background:var(--darker)}
+.resource-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:2px;
+  margin-top:3rem;
+}
+@media(max-width:680px){.resource-grid{grid-template-columns:1fr}}
+.resource-card{
+  background:var(--panel);
+  padding:2.5rem;
+  cursor:pointer;
+  border-left:3px solid transparent;
+  transition:all 0.25s;
+  display:block;text-decoration:none;
+}
+.resource-card:hover{background:var(--panel2);border-left-color:var(--red)}
+.rc-header{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:1rem}
+.rc-icon{
+  font-size:1.8rem;
+  background:rgba(232,0,28,0.1);
+  width:52px;height:52px;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.rc-arrow{
+  font-size:1.2rem;color:var(--muted);
+  transition:all 0.25s;margin-top:4px;
+}
+.resource-card:hover .rc-arrow{color:var(--red);transform:translateX(4px)}
+.rc-title{
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:700;font-size:1.3rem;letter-spacing:0.05em;text-transform:uppercase;
+  color:var(--white);margin-bottom:0.5rem;
+}
+.rc-desc{font-size:0.9rem;color:var(--lightgray);line-height:1.65;margin-bottom:1.25rem}
+.rc-files{display:flex;flex-wrap:wrap;gap:8px}
+.rc-file{
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:600;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--gold);
+  border:1px solid rgba(245,197,24,0.25);
+  padding:4px 10px;
+  display:flex;align-items:center;gap:5px;
+}
+.rc-file-dot{width:5px;height:5px;background:var(--gold);border-radius:50%;flex-shrink:0}
+
+/* ── SUBPAGES (hidden by default) ── */
+.subpage{display:none;min-height:100vh;padding:8rem 2rem 4rem}
+.subpage.active{display:block}
+.subpage-header{
+  border-bottom:1px solid var(--border);
+  padding-bottom:2rem;margin-bottom:3rem;
+}
+.subpage-back{
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:600;font-size:13px;letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--muted);background:none;border:none;cursor:pointer;
+  display:flex;align-items:center;gap:6px;margin-bottom:1.5rem;
+  padding:0;transition:color 0.2s;
+}
+.subpage-back:hover{color:var(--white)}
+.subpage-title{
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:900;font-style:italic;
+  font-size:clamp(2.5rem,6vw,5rem);
+  color:var(--white);line-height:1;
+  margin-bottom:0.5rem;
+}
+.subpage-title .accent{color:var(--red)}
+.subpage-sub{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:1rem;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--muted);
+}
+.doc-list{display:flex;flex-direction:column;gap:2px}
+.doc-item{
+  background:var(--panel);
+  padding:1.5rem 2rem;
+  display:flex;align-items:center;justify-content:space-between;gap:1.5rem;
+  transition:background 0.2s;
+}
+.doc-item:hover{background:var(--panel2)}
+.doc-info{flex:1}
+.doc-name{
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:700;font-size:1.1rem;letter-spacing:0.05em;
+  color:var(--white);margin-bottom:0.2rem;
+}
+.doc-meta{font-size:13px;color:var(--muted)}
+.doc-type{
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:600;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--gold);border:1px solid rgba(245,197,24,0.3);
+  padding:3px 10px;flex-shrink:0;
+}
+.doc-dl{
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:700;font-size:13px;letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--black);background:var(--red);
+  padding:8px 20px;border:none;cursor:pointer;
+  text-decoration:none;display:inline-block;
+  transition:background 0.2s;white-space:nowrap;
+}
+.doc-dl:hover{background:var(--red2)}
+
+.subpage-body{font-size:1rem;color:var(--lightgray);line-height:1.8;max-width:700px}
+.subpage-body p{margin-bottom:1rem}
+.subpage-body ul{margin:1rem 0 1rem 1.5rem}
+.subpage-body li{margin-bottom:0.4rem}
+.subpage-body h3{
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:700;font-size:1.2rem;letter-spacing:0.05em;text-transform:uppercase;
+  color:var(--gold);margin:2rem 0 0.75rem;
+}
+
+/* ── SUPPORT TICKET ── */
+.support-section{background:var(--black)}
+.ticket-grid{
+  display:grid;grid-template-columns:1.2fr 1fr;gap:4rem;align-items:start;
+  margin-top:1rem;
+}
+@media(max-width:780px){.ticket-grid{grid-template-columns:1fr}}
+.ticket-form{display:flex;flex-direction:column;gap:1.25rem}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
+@media(max-width:580px){.form-row{grid-template-columns:1fr}}
+.form-group{display:flex;flex-direction:column;gap:6px}
+.form-label{
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:600;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--lightgray);
+}
+.form-input,.form-select,.form-textarea{
+  background:var(--panel);
+  border:1px solid var(--border);
+  color:var(--white);
+  padding:12px 16px;
+  font-family:'Barlow',sans-serif;font-size:15px;
+  transition:border-color 0.2s;
+  outline:none;
+  width:100%;
+}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--red)}
+.form-select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;padding-right:40px}
+.form-select option{background:var(--panel);color:var(--white)}
+.form-textarea{min-height:130px;resize:vertical}
+.form-submit{
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:700;font-size:14px;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--black);background:var(--red);
+  padding:16px 36px;border:none;cursor:pointer;
+  transition:background 0.2s;align-self:flex-start;
+}
+.form-submit:hover{background:var(--red2)}
+.ticket-info{padding-top:1rem}
+.ti-title{
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:700;font-size:1.1rem;letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:1rem;
+}
+.ti-item{
+  display:flex;gap:12px;align-items:flex-start;
+  padding:1rem 0;border-bottom:1px solid var(--border);
+  font-size:14px;color:var(--lightgray);
+}
+.ti-item:last-child{border-bottom:none}
+.ti-dot{color:var(--red);margin-top:3px;flex-shrink:0}
+.pete-support{
+  margin-top:2rem;
+  display:flex;align-items:center;gap:1rem;
+  background:var(--panel);padding:1.25rem;
+}
+.pete-support img{width:70px;height:auto;filter:drop-shadow(0 4px 12px rgba(232,0,28,0.2))}
+.pete-quote{font-size:14px;color:var(--lightgray);font-style:italic;line-height:1.6}
+.pete-quote strong{color:var(--white);font-style:normal}
+
+/* ── VIDEO LIBRARY ── */
+.video-section{background:var(--darker)}
+.video-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:3rem;
+}
+@media(max-width:780px){.video-grid{grid-template-columns:1fr}}
+.video-card{
+  background:var(--panel);padding:0;overflow:hidden;
+  border-bottom:2px solid transparent;transition:border-color 0.25s;
+}
+.video-card:hover{border-bottom-color:var(--red)}
+.video-thumb{
+  background:var(--darker);
+  aspect-ratio:16/9;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+}
+.video-play{
+  width:52px;height:52px;
+  background:var(--red);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.2rem;
+  transition:transform 0.2s;
+}
+.video-card:hover .video-play{transform:scale(1.1)}
+.video-placeholder-text{
+  position:absolute;bottom:0;left:0;right:0;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:11px;letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--muted);text-align:center;padding:8px;
+  background:rgba(0,0,0,0.5);
+}
+.video-info{padding:1.5rem}
+.video-tag{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--red);margin-bottom:0.4rem;
+}
+.video-title{
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:700;font-size:1.1rem;letter-spacing:0.03em;
+  color:var(--white);
+}
+
+/* ── FOOTER ── */
+footer{
+  background:var(--darker);
+  border-top:1px solid var(--border);
+  padding:3rem 2rem;
+}
+.footer-inner{
+  max-width:1100px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;
+}
+.footer-logo{
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:900;font-style:italic;font-size:2rem;
+}
+.footer-logo .six{color:var(--red)}
+.footer-tagline{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:12px;letter-spacing:0.25em;text-transform:uppercase;
+  color:var(--muted);margin-top:2px;
+}
+.footer-links{display:flex;gap:2rem;flex-wrap:wrap}
+.footer-links a{
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:600;font-size:13px;letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--muted);text-decoration:none;transition:color 0.2s;
+}
+.footer-links a:hover{color:var(--white)}
+.footer-copy{
+  font-size:12px;color:var(--muted);margin-top:2rem;
+  text-align:center;max-width:1100px;margin:2rem auto 0;
+  padding-top:1.5rem;border-top:1px solid var(--border);
+}
+
+/* ── MAIN PAGES WRAPPER ── */
+#main-site{display:block}
+#subpages{display:none}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(16px);transition:opacity 0.6s ease,transform 0.6s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ── MERCH TEASER ── */
+.merch-section{background:var(--black)}
+.merch-teaser{
+  background:var(--panel);
+  border:1px solid var(--border);
+  padding:4rem;text-align:center;
+  position:relative;overflow:hidden;
+}
+.merch-teaser::before{
+  content:'COMING SOON';
+  position:absolute;top:20px;right:-30px;
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:900;font-size:13px;letter-spacing:0.2em;
+  color:var(--black);background:var(--gold);
+  padding:4px 50px;transform:rotate(45deg);
+}
+.merch-pete{width:150px;margin-bottom:1.5rem;filter:drop-shadow(0 10px 30px rgba(232,0,28,0.25))}
+.merch-title{
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:900;font-style:italic;font-size:3rem;
+  color:var(--white);margin-bottom:0.75rem;
+}
+.merch-title .accent{color:var(--gold)}
+.merch-desc{color:var(--lightgray);max-width:500px;margin:0 auto 2rem;line-height:1.7}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-logo" onclick="showMain()"><span class="f">F</span><span class="six">6</span><span class="lb">LB</span></a>
+  <ul class="nav-links">
+    <li><a href="#how" onclick="showMain()">How It Works</a></li>
+    <li><a href="#resources" onclick="showMain()">Resources</a></li>
+    <li><a href="#videos" onclick="showMain()">Videos</a></li>
+    <li><a href="#merch" onclick="showMain()">Merch</a></li>
+  </ul>
+  <button class="nav-support" onclick="showMain();setTimeout(()=>document.getElementById('support').scrollIntoView({behavior:'smooth'}),100)">Submit a Ticket</button>
+</nav>
+
+<!-- ════════════════════════════════════
+     MAIN SITE
+════════════════════════════════════ -->
+<div id="main-site">
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-eyebrow">Focus 6 Leaderboard</div>
+      <h1 class="hero-title">
+        <span class="f6">F</span><span class="lb">6</span><span class="f6">LB</span>
+        <span class="sub">Brag. Beat. Compete.</span>
+      </h1>
+      <p class="hero-tagline">The GM Service Lane Performance System</p>
+      <p class="hero-desc">Daily advisor-level leaderboards across all six Focus 6 products — Batteries, Brakes, Cabin Air Filters, Engine Air Filters, Tires, and Wipers. Built for District Managers, Service Advisors, and everyone in between.</p>
+      <div class="hero-btns">
+        <a href="#resources" class="btn-primary">Resource Center</a>
+        <a href="#how" class="btn-outline">How It Works</a>
+      </div>
+    </div>
+    <div class="hero-pete">
+      <img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=375,fit=crop/zJw6koMRUZeEyPHQ/f6lb-logo-abMJiDgCopiLrbEz.png" alt="Pete — F6LB Mascot" onerror="this.style.display='none'">
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat-item"><div class="stat-num">700+</div><div class="stat-lbl">Active Stores</div></div>
+  <div class="stat-item"><div class="stat-num">6</div><div class="stat-lbl">Focus Products</div></div>
+  <div class="stat-item"><div class="stat-num">&lt;10 min</div><div class="stat-lbl">Daily Data Load</div></div>
+  <div class="stat-item"><div class="stat-num">Daily</div><div class="stat-lbl">PDF Delivery</div></div>
+  <div class="stat-item"><div class="stat-num">Zero</div><div class="stat-lbl">Portals or Logins</div></div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section class="how-section" id="how">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag">How It Works</div>
+      <h2 class="section-title">Fast. Simple. <span class="accent">Scalable.</span></h2>
+    </div>
+    <div class="how-grid reveal">
+      <div class="how-item">
+        <div class="how-num">01</div>
+        <div class="how-icon">📥</div>
+        <div class="how-title">Data Load</div>
+        <div class="how-desc">Our analyst retrieves Maxis/Spiffy data and pastes it into the centralized Loader. The Loader automatically distributes it across all 700+ store files — completed in under 10 minutes.</div>
+      </div>
+      <div class="how-item">
+        <div class="how-num">02</div>
+        <div class="how-icon">📊</div>
+        <div class="how-title">Reports Generated</div>
+        <div class="how-desc">Each store file populates with advisor names, units sold, peer comparisons (Brag), NADA benchmark comparisons (Beat), and anonymized district rankings (Compete).</div>
+      </div>
+      <div class="how-item">
+        <div class="how-num">03</div>
+        <div class="how-icon">📬</div>
+        <div class="how-title">PDF to Inbox</div>
+        <div class="how-desc">The District Manager clicks the F6LB logo in the workbook. PDFs publish and email directly to each service advisor — no portals, no logins, no delays. Done in about 10 minutes.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOCUS 6 PRODUCTS -->
+<section class="f6-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag">The Products</div>
+      <h2 class="section-title">The <span class="accent">Focus 6</span></h2>
+    </div>
+    <div class="f6-grid reveal">
+      <div class="f6-item"><span class="f6-emoji">🔋</span><div class="f6-name">Batteries</div><div class="f6-tag">1 in 10</div></div>
+      <div class="f6-item"><span class="f6-emoji">🛞</span><div class="f6-name">Brakes</div><div class="f6-tag">1 in 8</div></div>
+      <div class="f6-item"><span class="f6-emoji">💨</span><div class="f6-name">Cabin Air</div><div class="f6-tag">1 in 3</div></div>
+      <div class="f6-item"><span class="f6-emoji">🌬️</span><div class="f6-name">Engine Air</div><div class="f6-tag">1 in 4</div></div>
+      <div class="f6-item"><span class="f6-emoji">⬛</span><div class="f6-name">Tires</div><div class="f6-tag">1 in 7</div></div>
+      <div class="f6-item"><span class="f6-emoji">🪟</span><div class="f6-name">Wipers</div><div class="f6-tag">1 in 3</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- RESOURCE CENTER -->
+<section class="resources-section" id="resources">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag">Resource Center</div>
+      <h2 class="section-title">Everything You <span class="accent">Need.</span></h2>
+    </div>
+    <div class="resource-grid reveal">
+
+      <a class="resource-card" href="#" onclick="openSubpage('manager-reports');return false;">
+        <div class="rc-header">
+          <div class="rc-icon">📋</div>
+          <div class="rc-arrow">→</div>
+        </div>
+        <div class="rc-title">Manager Reports</div>
+        <div class="rc-desc">Daily and monthly PDF reports for District Managers — store-level F6 performance, advisor breakdowns, and district standings at a glance.</div>
+        <div class="rc-files">
+          <div class="rc-file"><div class="rc-file-dot"></div>Sample Report</div>
+          <div class="rc-file"><div class="rc-file-dot"></div>DMPS Guide</div>
+        </div>
+      </a>
+
+      <a class="resource-card" href="#" onclick="openSubpage('buy-sells');return false;">
+        <div class="rc-header">
+          <div class="rc-icon">💰</div>
+          <div class="rc-arrow">→</div>
+        </div>
+        <div class="rc-title">Buy/Sells</div>
+        <div class="rc-desc">Reference materials and procedures for handling buy/sell scenarios within the F6LB system — keeping data clean during store transitions.</div>
+        <div class="rc-files">
+          <div class="rc-file"><div class="rc-file-dot"></div>Buy/Sell Procedure</div>
+          <div class="rc-file"><div class="rc-file-dot"></div>Checklist</div>
+        </div>
+      </a>
+
+      <a class="resource-card" href="#" onclick="openSubpage('unknown-advisors');return false;">
+        <div class="rc-header">
+          <div class="rc-icon">❓</div>
+          <div class="rc-arrow">→</div>
+        </div>
+        <div class="rc-title">Unknown Advisors</div>
+        <div class="rc-desc">Step-by-step guidance for resolving unknown advisor entries in Maxis — what causes them, how to identify them, and how to fix them fast.</div>
+        <div class="rc-files">
+          <div class="rc-file"><div class="rc-file-dot"></div>Resolution Guide</div>
+          <div class="rc-file"><div class="rc-file-dot"></div>Common Causes</div>
+        </div>
+      </a>
+
+      <a class="resource-card" href="#" onclick="openSubpage('admin-tab');return false;">
+        <div class="rc-header">
+          <div class="rc-icon">⚙️</div>
+          <div class="rc-arrow">→</div>
+        </div>
+        <div class="rc-title">The ADMIN Tab</div>
+        <div class="rc-desc">Full walkthrough of the ADMIN tab in the F6LB workbook — loading data, managing store files, pushing PDFs, and configuring advisor email lists.</div>
+        <div class="rc-files">
+          <div class="rc-file"><div class="rc-file-dot"></div>Admin Walkthrough</div>
+          <div class="rc-file"><div class="rc-file-dot"></div>Email Setup</div>
+        </div>
+      </a>
+
+      <a class="resource-card" href="#" onclick="openSubpage('i-sold-more');return false;">
+        <div class="rc-header">
+          <div class="rc-icon">🏆</div>
+          <div class="rc-arrow">→</div>
+        </div>
+        <div class="rc-title">"I Sold More"</div>
+        <div class="rc-desc">Handling advisor disputes about leaderboard accuracy — what to do when an advisor believes their numbers are wrong and how to investigate discrepancies.</div>
+        <div class="rc-files">
+          <div class="rc-file"><div class="rc-file-dot"></div>Dispute Process</div>
+          <div class="rc-file"><div class="rc-file-dot"></div>Data FAQ</div>
+        </div>
+      </a>
+
+      <a class="resource-card" href="#" onclick="openSubpage('out-of-office');return false;">
+        <div class="rc-header">
+          <div class="rc-icon">🏖️</div>
+          <div class="rc-arrow">→</div>
+        </div>
+        <div class="rc-title">Out Of Office</div>
+        <div class="rc-desc">Managing F6LB when advisors or managers are out — how absences affect the leaderboard, what to communicate, and how to pause delivery if needed.</div>
+        <div class="rc-files">
+          <div class="rc-file"><div class="rc-file-dot"></div>OOO Procedures</div>
+          <div class="rc-file"><div class="rc-file-dot"></div>Coverage Guide</div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- VIDEO LIBRARY -->
+<section class="video-section" id="videos">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag">Video Library</div>
+      <h2 class="section-title">Learn & <span class="accent">Train.</span></h2>
+    </div>
+    <div class="video-grid reveal">
+      <div class="video-card">
+        <div class="video-thumb">
+          <div class="video-play">▶</div>
+          <div class="video-placeholder-text">Coming Soon</div>
+        </div>
+        <div class="video-info">
+          <div class="video-tag">Overview</div>
+          <div class="video-title">What is F6LB?</div>
+        </div>
+      </div>
+      <div class="video-card">
+        <div class="video-thumb">
+          <div class="video-play">▶</div>
+          <div class="video-placeholder-text">Coming Soon</div>
+        </div>
+        <div class="video-info">
+          <div class="video-tag">For Advisors</div>
+          <div class="video-title">Reading Your Leaderboard</div>
+        </div>
+      </div>
+      <div class="video-card">
+        <div class="video-thumb">
+          <div class="video-play">▶</div>
+          <div class="video-placeholder-text">Coming Soon</div>
+        </div>
+        <div class="video-info">
+          <div class="video-tag">For DMPS</div>
+          <div class="video-title">District Manager Walkthrough</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUPPORT TICKET -->
+<section class="support-section" id="support">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag">Support</div>
+      <h2 class="section-title">Submit a <span class="accent">Ticket.</span></h2>
+    </div>
+    <div class="ticket-grid reveal">
+      <form class="ticket-form" onsubmit="submitTicket(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Your Name *</label>
+            <input type="text" class="form-input" placeholder="First Last" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Store Name / Number</label>
+            <input type="text" class="form-input" placeholder="e.g. Bergey's Chevrolet 318083">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">District</label>
+            <input type="text" class="form-input" placeholder="Your district">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Issue Type *</label>
+            <select class="form-select" required>
+              <option value="" disabled selected>Select issue type</option>
+              <option>Unknown Advisor</option>
+              <option>Missing Data</option>
+              <option>Email Delivery Issue</option>
+              <option>Buy/Sell Request</option>
+              <option>Leaderboard Dispute</option>
+              <option>ADMIN Tab Help</option>
+              <option>Out of Office Setup</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Description *</label>
+          <textarea class="form-textarea" placeholder="Describe your issue in detail..." required></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Your Email *</label>
+          <input type="email" class="form-input" placeholder="you@example.com" required>
+        </div>
+        <button type="submit" class="form-submit">Submit Ticket →</button>
+      </form>
+      <div class="ticket-info">
+        <div class="ti-title">What to expect</div>
+        <div class="ti-item"><span class="ti-dot">◆</span>Tickets route directly to the F6LB support inbox</div>
+        <div class="ti-item"><span class="ti-dot">◆</span>Response within one business day</div>
+        <div class="ti-item"><span class="ti-dot">◆</span>Urgent issues? Email <a href="mailto:support@f6lb.com" style="color:var(--gold)">support@f6lb.com</a> directly</div>
+        <div class="ti-item"><span class="ti-dot">◆</span>Include your store number for faster resolution</div>
+        <div class="pete-support">
+          <img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=375,fit=crop/zJw6koMRUZeEyPHQ/f6lb-logo-abMJiDgCopiLrbEz.png" alt="Pete" onerror="this.style.display='none'">
+          <div class="pete-quote"><strong>Pete's got your back.</strong> No issue is too small — we're here to keep your leaderboard running and your advisors competing.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MERCH -->
+<section class="merch-section" id="merch">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag">Merchandise</div>
+      <h2 class="section-title">Rep the <span class="accent">Brand.</span></h2>
+    </div>
+    <div class="merch-teaser reveal">
+      <img class="merch-pete" src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=375,fit=crop/zJw6koMRUZeEyPHQ/f6lb-logo-abMJiDgCopiLrbEz.png" alt="Pete" onerror="this.style.display='none'">
+      <div class="merch-title">F6LB <span class="accent">Merch</span></div>
+      <p class="merch-desc">Stickers, apparel, and branded gear for advisors who compete hard. StickerMule store available now — Shopify shop coming soon.</p>
+      <a href="https://www.stickermule.com" target="_blank" class="btn-primary">Shop StickerMule →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">F<span class="six">6</span>LB</div>
+      <div class="footer-tagline">Brag. Beat. Compete.</div>
+    </div>
+    <div class="footer-links">
+      <a href="#how">How It Works</a>
+      <a href="#resources">Resources</a>
+      <a href="#videos">Videos</a>
+      <a href="#support">Support</a>
+      <a href="#merch">Merch</a>
+      <a href="mailto:support@f6lb.com">Contact</a>
+    </div>
+  </div>
+  <div class="footer-copy">© 2025 F6LB — Focus 6 Leaderboard. Built for GM District Managers, Parts & Service. · <a href="mailto:support@f6lb.com" style="color:var(--muted);text-decoration:none">support@f6lb.com</a></div>
+</footer>
+
+</div><!-- /main-site -->
+
+
+<!-- ════════════════════════════════════
+     SUBPAGES
+════════════════════════════════════ -->
+<div id="subpages">
+
+  <!-- MANAGER REPORTS -->
+  <div id="sp-manager-reports" class="subpage" style="background:var(--darker)">
+    <div class="container">
+      <div class="subpage-header">
+        <button class="subpage-back" onclick="closeSubpage()">← Back to Resources</button>
+        <div class="subpage-title"><span class="accent">Manager</span> Reports</div>
+        <div class="subpage-sub">Daily & Monthly District Manager Reports</div>
+      </div>
+      <div class="subpage-body">
+        <p>Manager Reports give District Managers Parts & Service (DMPS) a real-time view of Focus 6 performance across every store in their district. Each report surfaces advisor-level data, store standings, and district leaderboard positions — all in a clean, printable PDF format.</p>
+        <h3>What's in the report</h3>
+        <ul>
+          <li>Units sold per advisor, per F6 product</li>
+          <li>% to NADA Replacement Propensity Objective</li>
+          <li>Store leader callout per product</li>
+          <li>District position (anonymized to prevent cross-store data sharing)</li>
+          <li>Bar graphs showing performance vs. objective and district leader</li>
+        </ul>
+        <h3>Best practices</h3>
+        <ul>
+          <li>Print and post the PDF where all staff can see it to drive engagement</li>
+          <li>Recognize and champion Store Leaders and advisors meeting their F6 objectives</li>
+          <li>Use the report to coach advisors on lost revenue opportunities</li>
+        </ul>
+      </div>
+      <div style="margin-top:3rem">
+        <div class="doc-list">
+          <div class="doc-item">
+            <div class="doc-info">
+              <div class="doc-name">F6LB Sample Report — Bergey's Chevrolet</div>
+              <div class="doc-meta">Example leaderboard report · MAR Final · 318083</div>
+            </div>
+            <div class="doc-type">PDF</div>
+            <a href="#" class="doc-dl" onclick="alert('Link your PDF here — replace this with the real file path.');return false">⬇ Download</a>
+          </div>
+          <div class="doc-item">
+            <div class="doc-info">
+              <div class="doc-name">F6LB One-Pager — Elevator Pitch</div>
+              <div class="doc-meta">Quick overview for new DMPS onboarding</div>
+            </div>
+            <div class="doc-type">PDF</div>
+            <a href="#" class="doc-dl" onclick="alert('Link your PDF here.');return false">⬇ Download</a>
+          </div>
+          <div class="doc-item">
+            <div class="doc-info">
+              <div class="doc-name">F6LB Quick Look Presentation</div>
+              <div class="doc-meta">Full overview deck · PowerPoint</div>
+            </div>
+            <div class="doc-type">PPTX</div>
+            <a href="#" class="doc-dl" onclick="alert('Link your PPTX here.');return false">⬇ Download</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BUY/SELLS -->
+  <div id="sp-buy-sells" class="subpage" style="background:var(--darker)">
+    <div class="container">
+      <div class="subpage-header">
+        <button class="subpage-back" onclick="closeSubpage()">← Back to Resources</button>
+        <div class="subpage-title"><span class="accent">Buy</span>/Sells</div>
+        <div class="subpage-sub">Store Transition Procedures</div>
+      </div>
+      <div class="subpage-body">
+        <p>When a dealership undergoes a buy/sell, F6LB data must be handled carefully to ensure accuracy and continuity. This section covers the procedures for managing store transitions within the F6LB system.</p>
+        <h3>What to do during a buy/sell</h3>
+        <ul>
+          <li>Notify the F6LB administrator before the transition date</li>
+          <li>Archive the existing store file with the previous ownership data</li>
+          <li>Reset advisor email lists for the new ownership group</li>
+          <li>Coordinate with the incoming DMPS on data continuity preferences</li>
+        </ul>
+        <h3>Common questions</h3>
+        <ul>
+          <li>Historical data from the previous ownership is preserved separately</li>
+          <li>The new store file starts fresh from the transition date</li>
+          <li>District standings are not affected by buy/sell transitions</li>
+        </ul>
+      </div>
+      <div style="margin-top:3rem">
+        <div class="doc-list">
+          <div class="doc-item">
+            <div class="doc-info">
+              <div class="doc-name">Buy/Sell Procedure Guide</div>
+              <div class="doc-meta">Step-by-step transition checklist</div>
+            </div>
+            <div class="doc-type">PDF</div>
+            <a href="#" class="doc-dl" onclick="alert('Link your document here.');return false">⬇ Download</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- UNKNOWN ADVISORS -->
+  <div id="sp-unknown-advisors" class="subpage" style="background:var(--darker)">
+    <div class="container">
+      <div class="subpage-header">
+        <button class="subpage-back" onclick="closeSubpage()">← Back to Resources</button>
+        <div class="subpage-title"><span class="accent">Unknown</span> Advisors</div>
+        <div class="subpage-sub">Resolving Unmatched Advisor Entries</div>
+      </div>
+      <div class="subpage-body">
+        <p>Unknown Advisors appear in the F6LB system when Maxis data contains a name or employee ID that doesn't match any preloaded advisor in the store file. Resolving these quickly keeps your leaderboard accurate and fair.</p>
+        <h3>Common causes</h3>
+        <ul>
+          <li>New advisor not yet added to the store file</li>
+          <li>Name spelling mismatch between Maxis and the store file</li>
+          <li>Employee ID change or update in Maxis</li>
+          <li>Temp or floater advisor from another store</li>
+        </ul>
+        <h3>Resolution steps</h3>
+        <ul>
+          <li>Identify the unknown entry in the ADMIN tab</li>
+          <li>Cross-reference with the store's current roster in Maxis</li>
+          <li>Add or correct the advisor entry in the store file</li>
+          <li>Re-run the data load for that store</li>
+          <li>If unresolvable, submit a support ticket</li>
+        </ul>
+      </div>
+      <div style="margin-top:3rem">
+        <div class="doc-list">
+          <div class="doc-item">
+            <div class="doc-info">
+              <div class="doc-name">Unknown Advisor Resolution Guide</div>
+              <div class="doc-meta">Step-by-step fix procedures</div>
+            </div>
+            <div class="doc-type">PDF</div>
+            <a href="#" class="doc-dl" onclick="alert('Link your document here.');return false">⬇ Download</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADMIN TAB -->
+  <div id="sp-admin-tab" class="subpage" style="background:var(--darker)">
+    <div class="container">
+      <div class="subpage-header">
+        <button class="subpage-back" onclick="closeSubpage()">← Back to Resources</button>
+        <div class="subpage-title">The <span class="accent">ADMIN</span> Tab</div>
+        <div class="subpage-sub">Full Workbook Administration Guide</div>
+      </div>
+      <div class="subpage-body">
+        <p>The ADMIN Tab is the control center of the F6LB workbook. Everything from loading daily data to pushing PDF reports to managing advisor email lists runs through here.</p>
+        <h3>Core functions</h3>
+        <ul>
+          <li>Paste Maxis/Spiffy data into the Loader</li>
+          <li>Review auto-distributed store files for accuracy</li>
+          <li>Click the F6LB logo to trigger PDF generation and email delivery</li>
+          <li>Manage and update advisor email lists per store</li>
+          <li>Monitor unknown advisors and flag for resolution</li>
+        </ul>
+        <h3>Daily workflow</h3>
+        <ul>
+          <li>Analyst loads data — under 10 minutes</li>
+          <li>DMPS reviews ADMIN tab and clicks to send — under 10 minutes</li>
+          <li>Advisors receive clean PDF in their inbox — no portals, no logins</li>
+        </ul>
+      </div>
+      <div style="margin-top:3rem">
+        <div class="doc-list">
+          <div class="doc-item">
+            <div class="doc-info">
+              <div class="doc-name">ADMIN Tab Full Walkthrough</div>
+              <div class="doc-meta">Detailed guide with screenshots</div>
+            </div>
+            <div class="doc-type">PDF</div>
+            <a href="#" class="doc-dl" onclick="alert('Link your document here.');return false">⬇ Download</a>
+          </div>
+          <div class="doc-item">
+            <div class="doc-info">
+              <div class="doc-name">Advisor Email Setup Guide</div>
+              <div class="doc-meta">How to preload and update email lists</div>
+            </div>
+            <div class="doc-type">PDF</div>
+            <a href="#" class="doc-dl" onclick="alert('Link your document here.');return false">⬇ Download</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- I SOLD MORE -->
+  <div id="sp-i-sold-more" class="subpage" style="background:var(--darker)">
+    <div class="container">
+      <div class="subpage-header">
+        <button class="subpage-back" onclick="closeSubpage()">← Back to Resources</button>
+        <div class="subpage-title"><span class="accent">"I Sold</span> More"</div>
+        <div class="subpage-sub">Handling Leaderboard Disputes</div>
+      </div>
+      <div class="subpage-body">
+        <p>Sometimes an advisor believes their leaderboard numbers don't reflect their actual sales. This section covers the process for investigating and resolving these disputes accurately and fairly.</p>
+        <h3>Why discrepancies happen</h3>
+        <ul>
+          <li>Repair orders not yet closed in Maxis at time of data pull</li>
+          <li>Customer pay vs. warranty distinction in Maxis (only CP counts)</li>
+          <li>Sale attributed to wrong advisor in the RO</li>
+          <li>Data pull timing — yesterday's close vs. current month</li>
+        </ul>
+        <h3>How to handle it</h3>
+        <ul>
+          <li>Ask the advisor for the specific RO number(s) in question</li>
+          <li>Verify the RO is customer pay and closed in Maxis</li>
+          <li>Check the advisor name on the RO matches their F6LB entry</li>
+          <li>If confirmed discrepancy, submit a support ticket with RO details</li>
+        </ul>
+      </div>
+      <div style="margin-top:3rem">
+        <div class="doc-list">
+          <div class="doc-item">
+            <div class="doc-info">
+              <div class="doc-name">Dispute Investigation Checklist</div>
+              <div class="doc-meta">Step-by-step for DMPS and Service Managers</div>
+            </div>
+            <div class="doc-type">PDF</div>
+            <a href="#" class="doc-dl" onclick="alert('Link your document here.');return false">⬇ Download</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OUT OF OFFICE -->
+  <div id="sp-out-of-office" class="subpage" style="background:var(--darker)">
+    <div class="container">
+      <div class="subpage-header">
+        <button class="subpage-back" onclick="closeSubpage()">← Back to Resources</button>
+        <div class="subpage-title">Out of <span class="accent">Office</span></div>
+        <div class="subpage-sub">Managing F6LB During Absences</div>
+      </div>
+      <div class="subpage-body">
+        <p>When advisors or managers are away, F6LB can be configured to handle absences gracefully — keeping data clean and competition fair.</p>
+        <h3>Advisor is out</h3>
+        <ul>
+          <li>Advisor's data simply won't accumulate while they're absent — this is expected</li>
+          <li>No action needed for short absences (1–2 days)</li>
+          <li>For extended leave, notify your DMPS so context is available for coaching</li>
+        </ul>
+        <h3>DMPS is out</h3>
+        <ul>
+          <li>Identify a backup contact to run the daily ADMIN tab send</li>
+          <li>Ensure backup has access to the workbook and email credentials</li>
+          <li>Alternatively, pause delivery for the absence period — submit a ticket to request</li>
+        </ul>
+        <h3>Analyst is out</h3>
+        <ul>
+          <li>Data load cannot proceed without the analyst — reports will be delayed</li>
+          <li>DMPS will be notified when a delay occurs</li>
+          <li>Reports will resume on the next available day automatically</li>
+        </ul>
+      </div>
+      <div style="margin-top:3rem">
+        <div class="doc-list">
+          <div class="doc-item">
+            <div class="doc-info">
+              <div class="doc-name">Out of Office Procedures Guide</div>
+              <div class="doc-meta">Coverage and pause request procedures</div>
+            </div>
+            <div class="doc-type">PDF</div>
+            <a href="#" class="doc-dl" onclick="alert('Link your document here.');return false">⬇ Download</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /subpages -->
+
+<script>
+// ── NAV scroll
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').classList.toggle('scrolled',window.scrollY>50)
+})
+
+// ── Page switching
+function showMain(){
+  document.getElementById('main-site').style.display='block'
+  document.getElementById('subpages').style.display='none'
+  document.querySelectorAll('.subpage').forEach(p=>p.classList.remove('active'))
+}
+
+function openSubpage(id){
+  document.getElementById('main-site').style.display='none'
+  document.getElementById('subpages').style.display='block'
+  document.querySelectorAll('.subpage').forEach(p=>p.classList.remove('active'))
+  const sp=document.getElementById('sp-'+id)
+  if(sp){sp.classList.add('active')}
+  window.scrollTo({top:0,behavior:'smooth'})
+}
+
+function closeSubpage(){
+  showMain()
+  setTimeout(()=>{
+    document.getElementById('resources').scrollIntoView({behavior:'smooth'})
+  },100)
+}
+
+// ── Reveal on scroll
+const revealObserver=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){e.target.classList.add('visible');revealObserver.unobserve(e.target)}
+  })
+},{threshold:0.1})
+document.querySelectorAll('.reveal').forEach(el=>revealObserver.observe(el))
+
+// ── Ticket form
+function submitTicket(e){
+  e.preventDefault()
+  const btn=e.target.querySelector('.form-submit')
+  btn.textContent='Ticket Submitted ✓'
+  btn.style.background='#1a7a1a'
+  btn.disabled=true
+  setTimeout(()=>{
+    btn.textContent='Submit Ticket →'
+    btn.style.background=''
+    btn.disabled=false
+    e.target.reset()
+  },4000)
+}
+</script>
+</body>
+</html>
