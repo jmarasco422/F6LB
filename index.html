@@ -1178,7 +1178,7 @@ footer{
         <div style="background:#E8001C;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;">
           <div>
             <div style="font-family:'Barlow Condensed',Arial Narrow,sans-serif;font-size:22px;font-weight:900;font-style:italic;color:#fff;letter-spacing:0.05em;">F<span style="color:#111;">6</span>LB</div>
-            <div style="font-size:13px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.85);">Bergey's Chevrolet · #318083</div>
+            <div style="font-size:13px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.85);">Demo Chevrolet · #000000</div>
           </div>
           <div style="text-align:right;">
             <div style="font-size:12px;letter-spacing:0.15em;color:rgba(255,255,255,0.7);text-transform:uppercase;">April 2025</div>
@@ -1290,6 +1290,101 @@ function submitTicket(e){
     f.reset()
   },3000)
 }
+
+function closeSubpageHome(){
+  showMain()
+  window.scrollTo({top:0,behavior:'smooth'})
+}
+
+const spDemoData = {
+  batteries:{obj:9,nada:'1 in 10',opps:'~20',advisors:[
+    {name:'Mike Callahan',units:11,district:'2nd in district'},
+    {name:'Sara Whitfield',units:9,district:'4th in district'},
+    {name:'Tony Reeves',units:6,district:'6th in district'},
+    {name:'Dana Kowalski',units:3,district:'12th in district'}
+  ]},
+  brakes:{obj:13,nada:'1 in 8',opps:'~25',advisors:[
+    {name:'Sara Whitfield',units:15,district:'3rd in district'},
+    {name:'Mike Callahan',units:13,district:'5th in district'},
+    {name:'Dana Kowalski',units:9,district:'9th in district'},
+    {name:'Tony Reeves',units:4,district:'18th in district'}
+  ]},
+  cabin:{obj:20,nada:'1 in 3',opps:'~66',advisors:[
+    {name:'Mike Callahan',units:24,district:'1st in district'},
+    {name:'Tony Reeves',units:18,district:'7th in district'},
+    {name:'Sara Whitfield',units:14,district:'11th in district'},
+    {name:'Dana Kowalski',units:7,district:'19th in district'}
+  ]},
+  engine:{obj:18,nada:'1 in 4',opps:'~50',advisors:[
+    {name:'Mike Callahan',units:20,district:'3rd in district'},
+    {name:'Sara Whitfield',units:16,district:'6th in district'},
+    {name:'Tony Reeves',units:11,district:'10th in district'},
+    {name:'Dana Kowalski',units:5,district:'21st in district'}
+  ]},
+  tires:{obj:28,nada:'1 in 7',opps:'~50',advisors:[
+    {name:'Tony Reeves',units:32,district:'3rd in district'},
+    {name:'Mike Callahan',units:27,district:'6th in district'},
+    {name:'Sara Whitfield',units:22,district:'9th in district'},
+    {name:'Dana Kowalski',units:11,district:'20th in district'}
+  ]},
+  wipers:{obj:14,nada:'1 in 3',opps:'~66',advisors:[
+    {name:'Sara Whitfield',units:17,district:'4th in district'},
+    {name:'Mike Callahan',units:14,district:'7th in district'},
+    {name:'Dana Kowalski',units:13,district:'9th in district'},
+    {name:'Tony Reeves',units:8,district:'16th in district'}
+  ]}
+}
+
+function spDemoTab(key,el){
+  document.querySelectorAll('.sp-demo-tab').forEach(t=>{
+    t.style.color='#666';t.style.borderBottomColor='transparent'
+  })
+  el.style.color='#F5C518';el.style.borderBottomColor='#F5C518'
+  spRenderDemo(key)
+}
+
+function spRenderDemo(key){
+  const d=spDemoData[key]
+  const rankColors=['#F5C518','#aaa','#cd7f32','#444']
+  let html=`<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-bottom:16px;">
+    <div style="background:#161616;padding:12px 14px;text-align:center;"><div style="font-size:22px;font-weight:900;color:#F5C518;font-family:'Barlow Condensed',sans-serif;">${d.nada}</div><div style="font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:#555;margin-top:3px;">NADA Rate</div></div>
+    <div style="background:#161616;padding:12px 14px;text-align:center;"><div style="font-size:22px;font-weight:900;color:#fff;font-family:'Barlow Condensed',sans-serif;">${d.obj}</div><div style="font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:#555;margin-top:3px;">Monthly Obj.</div></div>
+    <div style="background:#161616;padding:12px 14px;text-align:center;"><div style="font-size:22px;font-weight:900;color:#fff;font-family:'Barlow Condensed',sans-serif;">${d.opps}</div><div style="font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:#555;margin-top:3px;">Avg Opportunities</div></div>
+  </div>
+  <div style="display:grid;grid-template-columns:28px 1fr 70px 80px 110px;gap:8px;align-items:center;padding:0 0 8px;border-bottom:1px solid #1E1E1E;margin-bottom:4px;">
+    <div style="font-size:10px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:#444;font-family:'Barlow Condensed',sans-serif;">#</div>
+    <div style="font-size:10px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:#444;font-family:'Barlow Condensed',sans-serif;">Advisor</div>
+    <div style="font-size:10px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:#444;text-align:center;font-family:'Barlow Condensed',sans-serif;">Units</div>
+    <div style="font-size:10px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:#444;font-family:'Barlow Condensed',sans-serif;">% Obj.</div>
+    <div style="font-size:10px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:#444;font-family:'Barlow Condensed',sans-serif;">District</div>
+  </div>`
+  d.advisors.forEach((a,i)=>{
+    const pct=a.units>0?Math.round((a.units/d.obj)*100):0
+    const cls=pct>=100?'#2ecc71':pct>=60?'#F5C518':'#E8001C'
+    const pctTxt=a.units>0?(pct>=100?'Met!':pct+'%'):'—'
+    const barW=Math.min(100,pct)
+    const isLeader=i===0&&a.units>0
+    html+=`<div style="display:grid;grid-template-columns:28px 1fr 70px 80px 110px;gap:8px;align-items:center;padding:10px 0;border-bottom:1px solid #1E1E1E;">
+      <div style="font-size:13px;font-weight:700;color:${rankColors[i]||'#444'};text-align:center;font-family:'Barlow Condensed',sans-serif;">${i+1}</div>
+      <div><div style="font-size:14px;font-weight:700;color:#F0F0F0;letter-spacing:0.04em;font-family:'Barlow Condensed',sans-serif;">${a.name}${isLeader?'<span style="font-size:9px;font-weight:700;letter-spacing:0.1em;color:#111;background:#F5C518;padding:2px 6px;text-transform:uppercase;display:inline-block;margin-left:6px;vertical-align:middle;">Leader</span>':''}</div></div>
+      <div style="font-size:18px;font-weight:900;color:#fff;text-align:center;font-family:'Barlow Condensed',sans-serif;">${a.units}</div>
+      <div>
+        <div style="font-size:13px;font-weight:700;color:${cls};font-family:'Barlow Condensed',sans-serif;">${pctTxt}</div>
+        <div style="height:5px;background:#222;margin-top:4px;"><div class="sp-demo-bar" style="height:100%;width:0%;background:${cls};transition:width 0.8s ease;" data-w="${barW}"></div></div>
+      </div>
+      <div style="font-size:11px;color:#666;text-transform:uppercase;letter-spacing:0.08em;font-family:'Barlow Condensed',sans-serif;">${a.district}</div>
+    </div>`
+  })
+  document.getElementById('sp-demo-body').innerHTML=html
+  setTimeout(()=>{document.querySelectorAll('.sp-demo-bar').forEach(b=>{b.style.width=b.dataset.w+'%'})},100)
+}
+
+const _origOpenSubpage = openSubpage
+openSubpage = function(id){
+  _origOpenSubpage(id)
+  if(id==='leaderboard-demo'){spRenderDemo('batteries')}
+}
+
 </script>
 </body>
 </html>
