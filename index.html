@@ -560,6 +560,7 @@ footer{
     <li><a href="#how" onclick="showMain()">How It Works</a></li>
     <li><a href="#resources" onclick="showMain()">Resources</a></li>
     <li><a href="#videos" onclick="showMain()">Videos</a></li>
+    <li><a href="#" onclick="openSubpage('leaderboard-demo');return false;">Demo</a></li>
     <li><a href="#merch" onclick="showMain()">Merch</a></li>
   </ul>
   <button class="nav-support" onclick="showMain();setTimeout(()=>document.getElementById('support').scrollIntoView({behavior:'smooth'}),100)">Submit a Ticket</button>
@@ -585,6 +586,7 @@ footer{
       <p class="hero-desc">Daily advisor-level leaderboards across all six Focus 6 products — Batteries, Brakes, Cabin Air Filters, Engine Air Filters, Tires, and Wipers. Built for District Managers, Service Advisors, and everyone in between.</p>
       <div class="hero-btns">
         <a href="#resources" class="btn-primary">Resource Center</a>
+        <a href="#" class="btn-outline" onclick="openSubpage('leaderboard-demo');return false;">See Live Demo</a>
         <a href="#how" class="btn-outline">How It Works</a>
       </div>
     </div>
@@ -632,6 +634,8 @@ footer{
     </div>
   </div>
 </section>
+
+
 
 <!-- FOCUS 6 PRODUCTS -->
 <section class="f6-section">
@@ -1154,6 +1158,65 @@ footer{
             <div class="doc-type">PDF</div>
             <a href="#" class="doc-dl">⬇ Download</a>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- LEADERBOARD DEMO SUBPAGE -->
+  <div id="sp-leaderboard-demo" class="subpage" style="background:#111;">
+    <div class="container">
+      <div class="subpage-header">
+        <button class="subpage-back" onclick="closeSubpageHome()">← Back to Home</button>
+        <div class="subpage-title">Live <span class="accent">Demo</span></div>
+        <div class="subpage-sub">See what lands in every advisor's inbox — daily</div>
+      </div>
+      <p style="color:#888;font-size:1rem;margin-bottom:2.5rem;max-width:640px;line-height:1.7;">Tab through all six Focus 6 products. This is an exact sample of the leaderboard report your advisors receive each day — no login, no portal, straight to their inbox.</p>
+
+      <div style="border:1px solid #1E1E1E;">
+        <div style="background:#E8001C;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;">
+          <div>
+            <div style="font-family:'Barlow Condensed',Arial Narrow,sans-serif;font-size:22px;font-weight:900;font-style:italic;color:#fff;letter-spacing:0.05em;">F<span style="color:#111;">6</span>LB</div>
+            <div style="font-size:13px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.85);">Bergey's Chevrolet · #318083</div>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-size:12px;letter-spacing:0.15em;color:rgba(255,255,255,0.7);text-transform:uppercase;">April 2025</div>
+            <div style="font-size:12px;letter-spacing:0.15em;color:rgba(255,255,255,0.7);text-transform:uppercase;margin-top:2px;">Month-to-Date</div>
+          </div>
+        </div>
+
+        <div style="padding:16px 20px 0;background:#111;">
+          <div style="display:flex;gap:2px;margin-bottom:16px;">
+            <div style="flex:1;padding:8px 10px;text-align:center;background:rgba(232,0,28,0.12);border-top:2px solid #E8001C;">
+              <div style="font-size:11px;font-weight:900;letter-spacing:0.2em;text-transform:uppercase;color:#E8001C;font-family:'Barlow Condensed',sans-serif;">Brag</div>
+              <div style="font-size:11px;color:#555;margin-top:2px;">Your store rank</div>
+            </div>
+            <div style="flex:1;padding:8px 10px;text-align:center;background:rgba(245,197,24,0.08);border-top:2px solid #F5C518;">
+              <div style="font-size:11px;font-weight:900;letter-spacing:0.2em;text-transform:uppercase;color:#F5C518;font-family:'Barlow Condensed',sans-serif;">Beat</div>
+              <div style="font-size:11px;color:#555;margin-top:2px;">vs NADA objective</div>
+            </div>
+            <div style="flex:1;padding:8px 10px;text-align:center;background:rgba(46,204,113,0.08);border-top:2px solid #2ecc71;">
+              <div style="font-size:11px;font-weight:900;letter-spacing:0.2em;text-transform:uppercase;color:#2ecc71;font-family:'Barlow Condensed',sans-serif;">Compete</div>
+              <div style="font-size:11px;color:#555;margin-top:2px;">District position</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:flex;background:#0D0D0D;border-bottom:1px solid #222;overflow-x:auto;">
+          <div class="sp-demo-tab active-sp-tab" onclick="spDemoTab('batteries',this)" style="padding:10px 16px;font-size:12px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:#F5C518;cursor:pointer;white-space:nowrap;border-bottom:2px solid #F5C518;font-family:'Barlow Condensed',sans-serif;transition:all 0.2s;">Batteries</div>
+          <div class="sp-demo-tab" onclick="spDemoTab('brakes',this)" style="padding:10px 16px;font-size:12px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:#666;cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;font-family:'Barlow Condensed',sans-serif;transition:all 0.2s;">Brakes</div>
+          <div class="sp-demo-tab" onclick="spDemoTab('cabin',this)" style="padding:10px 16px;font-size:12px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:#666;cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;font-family:'Barlow Condensed',sans-serif;transition:all 0.2s;">Cabin Air</div>
+          <div class="sp-demo-tab" onclick="spDemoTab('engine',this)" style="padding:10px 16px;font-size:12px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:#666;cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;font-family:'Barlow Condensed',sans-serif;transition:all 0.2s;">Engine Air</div>
+          <div class="sp-demo-tab" onclick="spDemoTab('tires',this)" style="padding:10px 16px;font-size:12px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:#666;cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;font-family:'Barlow Condensed',sans-serif;transition:all 0.2s;">Tires</div>
+          <div class="sp-demo-tab" onclick="spDemoTab('wipers',this)" style="padding:10px 16px;font-size:12px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:#666;cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;font-family:'Barlow Condensed',sans-serif;transition:all 0.2s;">Wipers</div>
+        </div>
+
+        <div id="sp-demo-body" style="background:#111;padding:16px 20px;min-height:300px;"></div>
+
+        <div style="background:#0D0D0D;padding:8px 20px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid #1E1E1E;">
+          <div style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#555;font-family:'Barlow Condensed',sans-serif;"><span style="display:inline-block;width:6px;height:6px;background:#2ecc71;border-radius:50%;margin-right:6px;animation:pulse 2s infinite;"></span>Sample data — updated daily in production</div>
+          <div style="font-size:11px;letter-spacing:0.1em;color:#444;text-transform:uppercase;font-family:'Barlow Condensed',sans-serif;">No login required</div>
         </div>
       </div>
     </div>
