@@ -1201,16 +1201,31 @@ document.querySelectorAll('.reveal').forEach(el=>revealObserver.observe(el))
 // ── Ticket form
 function submitTicket(e){
   e.preventDefault()
-  const btn=e.target.querySelector('.form-submit')
-  btn.textContent='Ticket Submitted ✓'
+  const f=e.target
+  const name=f.querySelector('input[placeholder="First Last"]').value
+  const store=f.querySelector('input[placeholder="e.g. Bergey\'s Chevrolet 318083"]').value
+  const district=f.querySelector('input[placeholder="Your district"]').value
+  const issueType=f.querySelector('.form-select').value
+  const description=f.querySelector('.form-textarea').value
+  const replyEmail=f.querySelector('input[type="email"]').value
+  const subject=encodeURIComponent('F6LB Support Ticket — '+issueType+' — '+name)
+  const body=encodeURIComponent(
+    'NAME: '+name+'\n'+
+    'STORE: '+store+'\n'+
+    'DISTRICT: '+district+'\n'+
+    'ISSUE TYPE: '+issueType+'\n'+
+    'REPLY TO: '+replyEmail+'\n\n'+
+    'DESCRIPTION:\n'+description
+  )
+  const btn=f.querySelector('.form-submit')
+  btn.textContent='Opening Email Client ✓'
   btn.style.background='#1a7a1a'
-  btn.disabled=true
+  window.location.href='mailto:support@f6lb.com?subject='+subject+'&body='+body
   setTimeout(()=>{
     btn.textContent='Submit Ticket →'
     btn.style.background=''
-    btn.disabled=false
-    e.target.reset()
-  },4000)
+    f.reset()
+  },3000)
 }
 </script>
 </body>
